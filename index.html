@@ -292,26 +292,6 @@
             transform: scale(1.2);
         }
 
-        .schedule {
-            background-color: #1E1E1E;
-            padding: 4rem 2rem;
-            margin: auto;
-            text-align: center;
-            animation: fadeInUp 1s ease;
-        }
-
-        .schedule h2 {
-            color: #FFD700;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .schedule p {
-            color: #f1f1f1;
-            font-size: 1.2rem;
-            margin: 0.5rem 0;
-        }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -413,31 +393,13 @@
     <section class="gallery" id="galeria">
         <h2>Galería</h2>
         <div class="gallery-category">
-            <h3
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería y Contacto</title>
-</head>
-<body>
-    <section class="gallery">
-        <h2>Galería</h2>
-        <div class="gallery-category">
-            <h3>Decoraciones para Eventos</h3>
+            <h3>Decoraciones</h3>
             <div class="gallery-grid">
-                <img src="https://via.placeholder.com/200" alt="Decoración 1">
-                <img src="https://via.placeholder.com/200" alt="Decoración 2">
-                <img src="https://via.placeholder.com/200" alt="Decoración 3">
-            </div>
-        </div>
-        <div class="gallery-category">
-            <h3>Desayunos Sorpresa</h3>
-            <div class="gallery-grid">
-                <img src="https://via.placeholder.com/200" alt="Desayuno 1">
-                <img src="https://via.placeholder.com/200" alt="Desayuno 2">
-                <img src="https://via.placeholder.com/200" alt="Desayuno 3">
+                <img src="https://i.imgur.com/VCWI27K.png" alt="Decoración 1">
+                <img src="https://i.imgur.com/XmSWPEu.png" alt="Decoración 2">
+                <img src="https://i.imgur.com/cExRvSs.png" alt="Decoración 3">
+                <img src="https://i.imgur.com/7RahH8S.png" alt="Decoración 4">
+                <img src="https://i.imgur.com/2STSOBG.png" alt="Decoración 5">
             </div>
         </div>
     </section>
@@ -445,16 +407,70 @@
     <section class="contact" id="contacto">
         <h2>Contacto</h2>
         <p>
-            <strong>Teléfono:</strong> +57 320 123 4567<br>
-            <strong>Email:</strong> contacto@monarcaevents.co<br>
-            <strong>Ubicación:</strong> Bogotá, Colombia<br>
-        </p>
-        <p>¡Síguenos en nuestras redes sociales!</p>
-        <p>
-            <a href="https://wa.me/573201234567" target="_blank">
-                WhatsApp <img src="https://via.placeholder.com/24" alt="WhatsApp Icon" class="whatsapp-icon">
+            Si deseas información adicional o tienes alguna consulta, no dudes en contactarnos:<br>
+            <strong>Email:</strong> monarcaeventsco@gmail.com<br>
+            <strong>WhatsApp:</strong> +57 317 4968554
+            <a href="https://wa.me/+573174968554" target="_blank">
+                <img src="https://i.imgur.com/BQeNOAJ.jpeg" alt="WhatsApp" class="whatsapp-icon">
             </a>
         </p>
     </section>
+
+    <footer>
+        &copy; 2025 MonarcaEventsCO. Todos los derechos reservados. Diseñado con amor para tus momentos especiales.
+        <a href="#">Política de Privacidad</a>
+    </footer>
+
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+    <button class="floating-button" onclick="scrollToTop()">↑</button>
+
+    <script>
+        const modal = document.getElementById("myModal");
+        const modalImg = document.getElementById("img01");
+        const closeBtn = document.querySelector(".close");
+
+        document.querySelectorAll(".gallery-grid img").forEach(img => {
+            img.addEventListener("click", () => {
+                modal.style.display = "block";
+                modalImg.src = img.src;
+            });
+        });
+
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        modal.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                modal.style.display = "none";
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Mostrar/ocultar botón flotante según el scroll
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.querySelector(".floating-button").style.display = "flex";
+            } else {
+                document.querySelector(".floating-button").style.display = "none";
+            }
+        };
+    </script>
 </body>
 </html>
