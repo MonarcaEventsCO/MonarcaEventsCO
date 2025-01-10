@@ -17,7 +17,7 @@
         .menu-button {
             position: fixed;
             top: 10px;
-            right: 10px;
+            left: 10px;
             background: none;
             border: none;
             cursor: pointer;
@@ -42,13 +42,13 @@
         .menu {
             position: fixed;
             top: 0;
-            right: -250px;
+            left: -250px;
             width: 250px;
             height: 100%;
             background-color: #1E1E1E;
             color: #f1f1f1;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-            transition: right 0.3s ease;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: left 0.3s ease;
             z-index: 1000;
             display: flex;
             flex-direction: column;
@@ -68,7 +68,7 @@
         }
 
         .menu.active {
-            right: 0;
+            left: 0;
         }
 
         .hero {
