@@ -36,11 +36,22 @@
             height: 4px;
             background-color: #FFD700;
             margin: 4px 0;
-            transition: transform 0.3s, opacity 0.3s;
+            transition: transform 0.3s, opacity 0.3s, top 0.3s, left 0.3s;
+            position: relative;
         }
 
-        .menu.active + .menu-button div {
+        .menu-button.active div:nth-child(1) {
+            transform: rotate(45deg);
+            top: 10px;
+        }
+
+        .menu-button.active div:nth-child(2) {
             opacity: 0;
+        }
+
+        .menu-button.active div:nth-child(3) {
+            transform: rotate(-45deg);
+            top: -10px;
         }
 
         .menu {
@@ -73,21 +84,6 @@
 
         .menu.active {
             left: 0;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            display: none;
-        }
-
-        .overlay.active {
-            display: block;
         }
 
         .hero {
@@ -230,7 +226,7 @@
     </style>
 </head>
 <body>
-    <button class="menu-button" onclick="toggleMenu()">
+    <button class="menu-button" onclick="toggleMenu()" id="menuButton">
         <div></div>
         <div></div>
         <div></div>
@@ -242,48 +238,12 @@
         <a href="#">Información de Contacto</a>
     </div>
 
-    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
-
-    <section class="hero">
-        <h2>Transformamos tus momentos en recuerdos inolvidables</h2>
-        <p>Bienvenido a MonarcaEventsCO, donde hacemos tus sueños realidad.</p>
-    </section>
-
-    <section class="services">
-        <h2>Nuestros Servicios</h2>
-        <ul>
-            <li>Decoración para fiestas y eventos</li>
-            <li>Desayunos sorpresa personalizados</li>
-            <li>Organización de cumpleaños y quinceañeras</li>
-            <li>Eventos corporativos y celebraciones especiales</li>
-        </ul>
-    </section>
-
-    <section class="contact">
-        <h2>Contacto</h2>
-        <p>
-            Si deseas información adicional o tienes alguna consulta, no dudes en contactarnos:<br>
-            <strong>Email:</strong> monarcaeventsco@gmail.com<br>
-            <strong>WhatsApp:</strong> +57 317 4968554
-            <a href="https://wa.me/+573174968554" target="_blank">
-                <img src="https://i.imgur.com/BQeNOAJ.jpeg" alt="WhatsApp" class="whatsapp-icon">
-            </a>
-        </p>
-    </section>
-
     <script>
         function toggleMenu() {
             const menu = document.getElementById('menu');
-            const overlay = document.getElementById('overlay');
+            const button = document.getElementById('menuButton');
             menu.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
-
-        function closeMenu() {
-            const menu = document.getElementById('menu');
-            const overlay = document.getElementById('overlay');
-            menu.classList.remove('active');
-            overlay.classList.remove('active');
+            button.classList.toggle('active');
         }
     </script>
 </body>
