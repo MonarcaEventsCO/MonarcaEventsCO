@@ -36,19 +36,11 @@
             height: 4px;
             background-color: #FFD700;
             margin: 5px 0;
-            transition: transform 0.3s, opacity 0.3s;
+            transition: opacity 0.3s;
         }
 
-        .menu-button.active div:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .menu-button.active div:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-button.active div:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
+        .menu-button.active div {
+            opacity: 0; /* Desaparecen las líneas cuando el menú está activo */
         }
 
         .menu {
