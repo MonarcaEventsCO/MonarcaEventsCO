@@ -15,26 +15,28 @@
         }
 
         .menu-button {
-            position: absolute;
+            position: fixed;
             top: 10px;
-            left: 10px;
+            right: 10px;
             background: none;
             border: none;
             cursor: pointer;
-            z-index: 1000;
+            z-index: 1001;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            width: 50px;
+            height: 50px;
             color: #FFD700;
-            font-size: 1rem;
-            font-weight: bold;
         }
 
         .menu-button div {
-            width: 30px;
+            width: 35px;
             height: 4px;
             background-color: #FFD700;
-            margin: 5px 0;
-            transition: 0.3s;
+            margin: 4px 0;
+            transition: transform 0.3s, opacity 0.3s;
         }
 
         .menu {
@@ -47,6 +49,7 @@
             color: #f1f1f1;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
             transition: right 0.3s ease;
+            z-index: 1000;
             display: flex;
             flex-direction: column;
             padding: 20px;
@@ -212,7 +215,6 @@
         <div></div>
         <div></div>
         <div></div>
-        <span>Menú</span>
     </button>
 
     <div class="menu" id="menu">
