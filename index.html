@@ -40,7 +40,7 @@
         }
 
         .menu-button.active div:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
+            transform: rotate(45deg) translate(5px, 5px);
         }
 
         .menu-button.active div:nth-child(2) {
@@ -48,7 +48,7 @@
         }
 
         .menu-button.active div:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
+            transform: rotate(-45deg) translate(5px, -5px);
         }
 
         .menu {
@@ -128,9 +128,88 @@
             line-height: 1.6;
         }
 
+        .services {
+            padding: 4rem 2rem;
+            max-width: 1100px;
+            margin: auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        .services h2 {
+            color: #FFD700;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .services ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .services ul li {
+            background-color: #1E1E1E;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #FFD700;
+        }
+
+        .services ul li:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(255, 215, 0, 0.2);
+        }
+
+        .contact {
+            padding: 4rem 2rem;
+            max-width: 1100px;
+            margin: auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        .contact h2 {
+            color: #FFD700;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact p {
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .contact strong {
+            color: #FFD700;
+        }
+
+        .whatsapp-icon {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-icon:hover {
+            transform: scale(1.2);
+        }
+
         @media (max-width: 768px) {
             .hero h2 {
                 font-size: 2rem;
+            }
+
+            .services ul {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -153,6 +232,28 @@
     <section class="hero">
         <h2>Transformamos tus momentos en recuerdos inolvidables</h2>
         <p>Bienvenido a MonarcaEventsCO, donde hacemos tus sueños realidad.</p>
+    </section>
+
+    <section class="services">
+        <h2>Nuestros Servicios</h2>
+        <ul>
+            <li>Decoración para fiestas y eventos</li>
+            <li>Desayunos sorpresa personalizados</li>
+            <li>Organización de cumpleaños y quinceañeras</li>
+            <li>Eventos corporativos y celebraciones especiales</li>
+        </ul>
+    </section>
+
+    <section class="contact">
+        <h2>Contacto</h2>
+        <p>
+            Si deseas información adicional o tienes alguna consulta, no dudes en contactarnos:<br>
+            <strong>Email:</strong> monarcaeventsco@gmail.com<br>
+            <strong>WhatsApp:</strong> +57 317 4968554
+            <a href="https://wa.me/+573174968554" target="_blank">
+                <img src="https://i.imgur.com/BQeNOAJ.jpeg" alt="WhatsApp" class="whatsapp-icon">
+            </a>
+        </p>
     </section>
 
     <script>
