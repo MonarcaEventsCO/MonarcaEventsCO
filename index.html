@@ -39,6 +39,10 @@
             transition: transform 0.3s, opacity 0.3s;
         }
 
+        .menu.active + .menu-button div {
+            opacity: 0;
+        }
+
         .menu {
             position: fixed;
             top: 0;
@@ -69,6 +73,21 @@
 
         .menu.active {
             left: 0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
         }
 
         .hero {
@@ -223,6 +242,8 @@
         <a href="#">Información de Contacto</a>
     </div>
 
+    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
     <section class="hero">
         <h2>Transformamos tus momentos en recuerdos inolvidables</h2>
         <p>Bienvenido a MonarcaEventsCO, donde hacemos tus sueños realidad.</p>
@@ -253,7 +274,16 @@
     <script>
         function toggleMenu() {
             const menu = document.getElementById('menu');
+            const overlay = document.getElementById('overlay');
             menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('menu');
+            const overlay = document.getElementById('overlay');
+            menu.classList.remove('active');
+            overlay.classList.remove('active');
         }
     </script>
 </body>
