@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desayunos Sorpresa - MonarcaEventsCO</title>
+    <title>MonarcaEventsCO</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
         body {
             font-family: "Poppins", Arial, sans-serif;
             margin: 0;
@@ -16,115 +14,69 @@
             overflow-x: hidden;
         }
 
-        /* Estilos originales del menú */
-        .menu-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: rgba(30, 30, 30, 0.9);
-            border: 2px solid #FFD700;
-            border-radius: 12px;
-            cursor: pointer;
-            z-index: 1001;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 50px;
-            height: 50px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+        header {
+            background-image: url('https://i.imgur.com/j5CTVuk.png');
+            background-size: cover;
+            background-position: center;
+            color: #FFD700;
+            padding: 1.5rem 0;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            animation: fadeInDown 1s ease-out;
+            position: relative;
         }
 
-        .menu-button:hover {
-            background: rgba(255, 215, 0, 0.1);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-        }
-
-        .menu-button div {
-            width: 28px;
-            height: 3px;
-            background-color: #FFD700;
-            margin: 4px 0;
-            transition: all 0.3s ease;
-            border-radius: 3px;
-        }
-
-        .menu-button.active div:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .menu-button.active div:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-button.active div:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        .menu {
-            position: fixed;
+        header::before {
+            content: '';
+            position: absolute;
             top: 0;
-            left: -100%;
-            width: 280px;
-            height: 100%;
-            background: rgba(30, 30, 30, 0.95);
-            color: #f1f1f1;
-            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.5);
-            transition: left 0.3s ease;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            padding: 80px 30px 30px;
-            backdrop-filter: blur(10px);
-        }
-
-        .menu.active {
             left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
         }
 
-        .menu a {
+        header h1 {
+            position: relative;
+            z-index: 2;
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #1E1E1E;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        nav a {
             color: #FFD700;
             text-decoration: none;
-            font-size: 1.1rem;
-            margin: 15px 0;
-            padding: 12px 20px;
-            border-radius: 8px;
+            margin: 0 1rem;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border: 2px solid #FFD700;
+            border-radius: 25px;
+            background-color: transparent;
             transition: all 0.3s ease;
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid transparent;
         }
 
-        .menu a:hover {
-            background: rgba(255, 215, 0, 0.2);
-            border-color: #FFD700;
-            transform: translateX(10px);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        nav a:hover {
+            background-color: #FFD700;
+            color: #121212;
+            transform: translateY(-2px);
         }
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 999;
-            backdrop-filter: blur(3px);
-        }
-
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Estilos originales del hero */
         .hero {
             text-align: center;
-            padding: 6rem 1rem;
+            padding: 4rem 1rem;
             background-color: #1E1E1E;
             color: white;
             font-size: 1.2rem;
@@ -132,441 +84,330 @@
             position: relative;
             overflow: hidden;
             background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
-            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
         }
 
-        .highlight {
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: slideInRight 1.5s ease;
             color: #FFD700;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-            position: relative;
-            display: inline-block;
         }
 
-        .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: #FFD700;
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
-        .highlight:hover::after {
-            transform: scaleX(1);
-        }
-
-        /* Nuevas categorías */
-        .categories {
+        .floating-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #FFD700;
+            color: #121212;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
             display: flex;
-            overflow-x: auto;
-            padding: 15px;
-            gap: 10px;
-            background: rgba(30, 30, 30, 0.95);
-            margin-bottom: 20px;
-            scrollbar-width: none;
-        }
-
-        .categories::-webkit-scrollbar {
-            display: none;
-        }
-
-        .category {
-            background: rgba(255, 215, 0, 0.1);
-            color: #FFD700;
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 1px solid #FFD700;
-            white-space: nowrap;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 24px;
+            z-index: 1000;
         }
 
-        .category.active {
-            background: #FFD700;
-            color: #121212;
+        .floating-button:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
         }
 
-        .category:hover {
-            background: rgba(255, 215, 0, 0.2);
-            transform: translateY(-2px);
-        }
-
-        /* Estilos originales de la galería con mejoras */
-        .gallery {
-            padding: 6rem 2rem;
-            max-width: 1200px;
+        .services, .contact {
+            padding: 4rem 2rem;
+            max-width: 1100px;
             margin: auto;
             animation: fadeInUp 1s ease;
+        }
+
+        .services h2, .contact h2 {
+            color: #FFD700;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .services ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .services ul li {
+            background-color: #1E1E1E;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #FFD700;
+        }
+
+        .services ul li:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(255, 215, 0, 0.2);
+        }
+
+        .gallery {
+            padding: 4rem 2rem;
+            max-width: 1100px;
+            margin: auto;
+            animation: fadeIn 1.5s ease-in-out;
         }
 
         .gallery h2 {
             color: #FFD700;
             text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
+            margin-bottom: 2rem;
         }
 
-        .gallery h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+        .gallery-category h3 {
+            color: #FFD700;
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
             justify-items: center;
-            padding: 1rem;
         }
 
-        .gallery-item {
-            position: relative;
+        .gallery-grid img {
             width: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            transition: all 0.4s ease;
-            background: #1E1E1E;
-            border: 2px solid rgba(255, 215, 0, 0.1);
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            border-color: #FFD700;
-            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 300px;
+            height: 200px;
             object-fit: cover;
-            transition: all 0.4s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Información de producto mejorada */
-        .gallery-item-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(30, 30, 30, 0.9);
-            padding: 1.2rem;
-            transform: translateY(100%);
-            transition: all 0.4s ease;
-            backdrop-filter: blur(5px);
-            border-top: 1px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .gallery-item:hover .gallery-item-info {
-            transform: translateY(0);
-        }
-
-        .gallery-item-title {
-            color: #FFD700;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .gallery-item-description {
-            color: #f1f1f1;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        /* Nuevo botón de compra */
-        .buy-button {
-            display: inline-block;
-            background: #FFD700;
-            color: #121212;
-            padding: 8px 16px;
-            border-radius: 20px;
-            margin-top: 10px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             cursor: pointer;
             transition: all 0.3s ease;
-            border: none;
-            font-weight: 500;
-            text-align: center;
+            border: 2px solid transparent;
         }
 
-        .buy-button:hover {
-            background: #ffd900;
+        .gallery-grid img:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            border-color: #FFD700;
+            box-shadow: 0 6px 12px rgba(255, 215, 0, 0.2);
         }
 
-        /* Modal mejorado */
         .modal {
+            display: none;
             position: fixed;
-            top: 0;
+            z-index: 1100;
+            padding-top: 50px;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1002;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(8px);
-        }
-
-        .modal.active {
-            opacity: 1;
-            visibility: visible;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.95);
+            animation: fadeIn 0.3s ease-out;
         }
 
         .modal-content {
-            position: relative;
+            margin: auto;
+            display: block;
             max-width: 90%;
-            max-height: 90%;
-            transform: scale(0.8);
-            transition: all 0.3s ease;
-            background: #1E1E1E;
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(255, 215, 0, 0.2);
+            animation: zoomIn 0.3s ease-out;
         }
 
-        .modal.active .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-close {
+        .close {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 215, 0, 0.2);
-            border: 2px solid #FFD700;
-            border-radius: 50%;
+            top: 15px;
+            right: 35px;
+            color: #FFD700;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
             cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s ease;
         }
 
-        .modal-close:hover {
-            background: rgba(255, 215, 0, 0.3);
+        .close:hover {
+            color: #fff;
             transform: rotate(90deg);
         }
 
-        .modal-close::before,
-        .modal-close::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 2px;
-            background: #FFD700;
-        }
-
-        .modal-close::before {
-            transform: rotate(45deg);
-        }
-
-        .modal-close::after {
-            transform: rotate(-45deg);
-        }
-
-        /* Contacto y WhatsApp */
-        .contact {
-            padding: 6rem 2rem;
-            background: rgba(30, 30, 30, 0.95);
-            border-top: 2px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .contact h2 {
-            color: #FFD700;
+        footer {
+            background-color: #1E1E1E;
+            color: white;
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 2px solid #FFD700;
         }
 
-        .contact h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+        footer a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        .contact p {
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .contact strong {
+            color: #FFD700;
         }
 
         .whatsapp-icon {
-            width: 32px;
-            height: 32px;
+            width: 24px;
+            height: 24px;
             vertical-align: middle;
             margin-left: 8px;
-            transition: all 0.3s ease;
-            border-radius: 50%;
-            padding: 5px;
-            background: rgba(255, 215, 0, 0.1);
+            transition: transform 0.3s ease;
         }
 
         .whatsapp-icon:hover {
-            transform: scale(1.2) rotate(10deg);
-            background: rgba(255, 215, 0, 0.2);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            transform: scale(1.2);
         }
 
-        /* Animaciones */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
 
-        @keyframes slideInRight {
-            from { transform: translateX(-100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
         @keyframes fadeInUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* Media Queries */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         @media (max-width: 768px) {
-            .hero h2 {
-                font-size: 2.2rem;
+            nav {
+                flex-wrap: wrap;
             }
 
-            .menu {
-                width: 250px;
+            nav a {
+                margin: 0.5rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .services ul {
+                grid-template-columns: 1fr;
             }
 
             .gallery-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 1.5rem;
-            }
-
-            .gallery-item img {
-                height: 250px;
-            }
-
-            .category {
-                padding: 6px 12px;
-                font-size: 0.9rem;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
         }
     </style>
 </head>
 <body>
-    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+    <header>
+        <h1>MonarcaEventsCO</h1>
+    </header>
 
-    <button class="menu-button" onclick="toggleMenu()" id="menuButton">
-        <div></div><div></div>
-        <div></div>
-    </button>
-
-    <div class="menu" id="menu">
-        <a href="https://monarcaeventsco.github.io/MonarcaEventsCO/">Inicio</a>
-        <a href="#">Desayunos</a>
-        <a href="#">Horarios de Atención</a>
-        <a href="#">Información de Contacto</a>
-    </div>
+    <nav>
+        <a href="#servicios">Servicios</a>
+        <a href="#galeria">Galería</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
 
     <section class="hero">
-        <h2>
-            Bienvenido a <span class="highlight">MonarcaEventsCO</span> donde hacemos tus sueños realidad
-        </h2>
-        <p>Transformamos tus momentos en recuerdos inolvidables. Explora nuestra galería de desayunos sorpresa.</p>
+        <h2>Transformamos tus momentos en recuerdos inolvidables</h2>
+        <p>Expertos en decoración de eventos y experiencias únicas</p>
     </section>
 
-    <div class="categories">
-        <div class="category active">Todos</div>
-        <div class="category">Románticos</div>
-        <div class="category">Especiales</div>
-        <div class="category">Premium</div>
-        <div class="category">Personalizados</div>
-    </div>
+    <section class="services" id="servicios">
+        <h2>Nuestros Servicios</h2>
+        <ul>
+            <li>Decoración para fiestas y eventos</li>
+            <li>Desayunos sorpresa personalizados</li>
+            <li>Organización de cumpleaños y quinceañeras</li>
+            <li>Eventos corporativos y celebraciones especiales</li>
+        </ul>
+    </section>
 
-    <section class="gallery">
-        <h2>Desayunos Sorpresa</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item" onclick="openModal(this)">
-                <img src="https://i.postimg.cc/FzNLS8Wf/Screenshot-2025-01-10-at-15-55-19-Instagram.png" alt="Desayuno Romántico">
-                <div class="gallery-item-info">
-                    <div class="gallery-item-title">Desayuno Romántico</div>
-                    <div class="gallery-item-description">Perfecto para sorprender a esa persona especial en cualquier ocasión. Escribe al WhatsApp para más información.</div>
-                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
-                </div>
-            </div>
-            
-            <div class="gallery-item" onclick="openModal(this)">
-                <img src="https://i.postimg.cc/7YPzZvJd/Screenshot-2025-01-10-at-15-47-21-Instagram.png" alt="Desayuno Especial">
-                <div class="gallery-item-info">
-                    <div class="gallery-item-title">Desayuno Especial</div>
-                    <div class="gallery-item-description">Una experiencia única llena de sabores y detalles inolvidables. Escribe al WhatsApp para más información.</div>
-                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
-                </div>
-            </div>
-            
-            <div class="gallery-item" onclick="openModal(this)">
-                <img src="https://i.postimg.cc/m2dHcdQD/Screenshot-2025-01-10-at-15-47-51-Instagram.png" alt="Desayuno Clásico">
-                <div class="gallery-item-info">
-                    <div class="gallery-item-title">Desayuno Clásico</div>
-                    <div class="gallery-item-description">La combinación perfecta de sabores tradicionales con un toque elegante. Escribe al WhatsApp para más información.</div>
-                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
-                </div>
-            </div>
-            
-            <div class="gallery-item" onclick="openModal(this)">
-                <img src="https://i.postimg.cc/dVLTG8B9/Screenshot-2025-01-10-at-15-48-22-Instagram.png" alt="Desayuno Premium">
-                <div class="gallery-item-info">
-                    <div class="gallery-item-title">Desayuno Premium</div>
-                    <div class="gallery-item-description">Una experiencia premium con los mejores ingredientes y presentación. Escribe al WhatsApp para más información.</div>
-                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
-                </div>
-            </div>
-            
-            <div class="gallery-item" onclick="openModal(this)">
-                <img src="https://i.postimg.cc/4xqHPm2R/Screenshot-2025-01-10-at-15-48-43-Instagram.png" alt="Desayuno Deluxe">
-                <div class="gallery-item-info">
-                    <div class="gallery-item-title">Desayuno Deluxe</div>
-                    <div class="gallery-item-description">Lujo y elegancia en cada detalle para ocasiones realmente especiales. Escribe al WhatsApp para más información.</div>
-                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
-                </div>
-            </div>
-            
-            <div class="gallery-item" onclick="openModal(this)">
-                <img src="https://i.postimg.cc/yNRgbs2g/Screenshot-2025-01-10-at-15-49-10-Instagram.png" alt="Desayuno Personalizado">
-                <div class="gallery-item-info">
-                    <div class="gallery-item-title">Desayuno Personalizado</div>
-                    <div class="gallery-item-description">Creado especialmente según tus preferencias y gustos. Escribe al WhatsApp para más información.</div>
-                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
-                </div>
+    <section class="gallery" id="galeria">
+        <h2>Galería</h2>
+        <div class="gallery-category">
+            <h3>Decoraciones</h3>
+            <div class="gallery-grid">
+                <img src="https://i.imgur.com/VCWI27K.png" alt="Decoración 1">
+                <img src="https://i.imgur.com/XmSWPEu.png" alt="Decoración 2">
+                <img src="https://i.imgur.com/cExRvSs.png" alt="Decoración 3">
+                <img src="https://i.imgur.com/7RahH8S.png" alt="Decoración 4">
+                <img src="https://i.imgur.com/2STSOBG.png" alt="Decoración 5">
             </div>
         </div>
     </section>
 
-    <section class="contact">
+    <section class="contact" id="contacto">
         <h2>Contacto</h2>
         <p>
-            Si deseas más información o tienes alguna consulta, no dudes en contactarnos:<br>
+            Si deseas información adicional o tienes alguna consulta, no dudes en contactarnos:<br>
             <strong>Email:</strong> monarcaeventsco@gmail.com<br>
             <strong>WhatsApp:</strong> +57 317 4968554
             <a href="https://wa.me/+573174968554" target="_blank">
@@ -575,117 +416,61 @@
         </p>
     </section>
 
+    <footer>
+        &copy; 2025 MonarcaEventsCO. Todos los derechos reservados. Diseñado con amor para tus momentos especiales.
+        <a href="#">Política de Privacidad</a>
+    </footer>
+
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+    <button class="floating-button" onclick="scrollToTop()">↑</button>
+
     <script>
-        // Función del menú
-        function toggleMenu() {
-            const menu = document.getElementById('menu');
-            const button = document.getElementById('menuButton');
-            const overlay = document.getElementById('overlay');
-            
-            menu.classList.toggle('active');
-            button.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
+        const modal = document.getElementById("myModal");
+        const modalImg = document.getElementById("img01");
+        const closeBtn = document.querySelector(".close");
 
-        // Función del modal mejorada
-        function openModal(item) {
-            const modal = document.createElement('div');
-            modal.className = 'modal';
-            
-            const modalContent = document.createElement('div');
-            modalContent.className = 'modal-content';
-            
-            const img = document.createElement('img');
-            img.src = item.querySelector('img').src;
-            img.style.maxWidth = '100%';
-            img.style.borderRadius = '10px';
-            
-            const info = item.querySelector('.gallery-item-info').cloneNode(true);
-            
-            modalContent.appendChild(img);
-            modalContent.appendChild(info);
-            modal.appendChild(modalContent);
-            
-            const closeButton = document.createElement('button');
-            closeButton.className = 'modal-close';
-            modalContent.appendChild(closeButton);
-            
-            document.body.appendChild(modal);
-            
-            setTimeout(() => modal.classList.add('active'), 10);
-            
-            modal.onclick = (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                    setTimeout(() => modal.remove(), 300);
-                }
-            };
-
-            closeButton.onclick = (e) => {
-                e.stopPropagation();
-                modal.classList.remove('active');
-                setTimeout(() => modal.remove(), 300);
-            };
-
-            document.body.style.overflow = 'hidden';
-            
-            modal.addEventListener('click', () => {
-                document.body.style.overflow = '';
-            });
-        }
-
-        // Función de compra actualizada
-        function comprarAhora(button, event) {
-            event.stopPropagation();
-            const item = button.closest('.gallery-item-info');
-            const title = item.querySelector('.gallery-item-title').textContent;
-            
-            const message = `¡Hola! Me interesa el ${title}. ¿Podrían darme más información?`;
-            window.open(`https://wa.me/+573174968554?text=${encodeURIComponent(message)}`, '_blank');
-        }
-
-        // Funcionalidad de categorías
-        document.querySelectorAll('.category').forEach(category => {
-            category.addEventListener('click', function() {
-                document.querySelectorAll('.category').forEach(c => 
-                    c.classList.remove('active'));
-                
-                this.classList.add('active');
-                
-                const selectedCategory = this.textContent.toLowerCase();
-                const items = document.querySelectorAll('.gallery-item');
-                
-                items.forEach(item => {
-                    const title = item.querySelector('.gallery-item-title')
-                        .textContent.toLowerCase();
-                    
-                    if (selectedCategory === 'todos') {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = title.includes(selectedCategory.slice(0, -1)) 
-                            ? 'block' 
-                            : 'none';
-                    }
-                });
+        document.querySelectorAll(".gallery-grid img").forEach(img => {
+            img.addEventListener("click", () => {
+                modal.style.display = "block";
+                modalImg.src = img.src;
             });
         });
 
-        // Lazy loading para imágenes
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        observer.unobserve(img);
-                    }
-                });
-            });
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        };
 
-            document.querySelectorAll('img[data-src]').forEach(img => {
-                imageObserver.observe(img);
+        modal.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                modal.style.display = "none";
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         }
+
+        // Mostrar/ocultar botón flotante según el scroll
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.querySelector(".floating-button").style.display = "flex";
+            } else {
+                document.querySelector(".floating-button").style.display = "none";
+            }
+        };
     </script>
 </body>
 </html>
