@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Bienvenida</title>
+    <title>Desayunos Sorpresa - MonarcaEventsCO</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
@@ -16,6 +16,7 @@
             overflow-x: hidden;
         }
 
+        /* Estilos originales del menú */
         .menu-button {
             position: fixed;
             top: 20px;
@@ -120,6 +121,7 @@
             visibility: visible;
         }
 
+        /* Estilos originales del hero */
         .hero {
             text-align: center;
             padding: 6rem 1rem;
@@ -131,14 +133,6 @@
             overflow: hidden;
             background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
             border-bottom: 2px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .hero h2 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            animation: slideInRight 1.5s ease;
-            font-weight: 600;
-            letter-spacing: 1px;
         }
 
         .highlight {
@@ -164,47 +158,236 @@
             transform: scaleX(1);
         }
 
-        .services {
+        /* Nuevas categorías */
+        .categories {
+            display: flex;
+            overflow-x: auto;
+            padding: 15px;
+            gap: 10px;
+            background: rgba(30, 30, 30, 0.95);
+            margin-bottom: 20px;
+            scrollbar-width: none;
+        }
+
+        .categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category {
+            background: rgba(255, 215, 0, 0.1);
+            color: #FFD700;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #FFD700;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category.active {
+            background: #FFD700;
+            color: #121212;
+        }
+
+        .category:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Estilos originales de la galería con mejoras */
+        .gallery {
             padding: 6rem 2rem;
             max-width: 1200px;
             margin: auto;
             animation: fadeInUp 1s ease;
         }
 
-        .services ul li {
-            background: rgba(30, 30, 30, 0.95);
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        .gallery h2 {
+            color: #FFD700;
             text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
             position: relative;
-            overflow: hidden;
         }
 
-        .services ul li::before {
+        .gallery h2::after {
             content: '';
             position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            justify-items: center;
+            padding: 1rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            background: #1E1E1E;
+            border: 2px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            border-color: #FFD700;
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Información de producto mejorada */
+        .gallery-item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(30, 30, 30, 0.9);
+            padding: 1.2rem;
+            transform: translateY(100%);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .gallery-item:hover .gallery-item-info {
+            transform: translateY(0);
+        }
+
+        .gallery-item-title {
+            color: #FFD700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .gallery-item-description {
+            color: #f1f1f1;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Nuevo botón de compra */
+        .buy-button {
+            display: inline-block;
+            background: #FFD700;
+            color: #121212;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .buy-button:hover {
+            background: #ffd900;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Modal mejorado */
+        .modal {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1002;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
         }
 
-        .services ul li:hover::before {
-            transform: translateX(100%);
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .services ul li:hover {
-            transform: translateY(-10px);
-            border-color: #FFD700;
-            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.2);
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            background: #1E1E1E;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid #FFD700;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 215, 0, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-close::before,
+        .modal-close::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: #FFD700;
+        }
+
+        .modal-close::before {
+            transform: rotate(45deg);
+        }
+
+        .modal-close::after {
+            transform: rotate(-45deg);
+        }
+
+        /* Contacto y WhatsApp */
         .contact {
             padding: 6rem 2rem;
             background: rgba(30, 30, 30, 0.95);
@@ -249,6 +432,7 @@
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
+        /* Animaciones */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -264,6 +448,7 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
+        /* Media Queries */
         @media (max-width: 768px) {
             .hero h2 {
                 font-size: 2.2rem;
@@ -273,8 +458,18 @@
                 width: 250px;
             }
 
-            .services ul {
-                grid-template-columns: 1fr;
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .gallery-item img {
+                height: 250px;
+            }
+
+            .category {
+                padding: 6px 12px;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -283,13 +478,13 @@
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
     <button class="menu-button" onclick="toggleMenu()" id="menuButton">
-        <div></div>
-        <div></div>
+        <div></div><div></div>
         <div></div>
     </button>
 
     <div class="menu" id="menu">
-        <a href="https://monarcaeventsco.github.io/Desayunos-MonarcaEventsCO/">Desayunos</a>
+        <a href="https://monarcaeventsco.github.io/MonarcaEventsCO/">Inicio</a>
+        <a href="#">Desayunos</a>
         <a href="#">Horarios de Atención</a>
         <a href="#">Información de Contacto</a>
     </div>
@@ -298,23 +493,80 @@
         <h2>
             Bienvenido a <span class="highlight">MonarcaEventsCO</span> donde hacemos tus sueños realidad
         </h2>
-        <p>Transformamos tus momentos en recuerdos inolvidables.</p>
+        <p>Transformamos tus momentos en recuerdos inolvidables. Explora nuestra galería de desayunos sorpresa.</p>
     </section>
 
-    <section class="services">
-        <h2>Nuestros Servicios</h2>
-        <ul>
-            <li>Decoración para fiestas y eventos</li>
-            <li><a href="https://monarcaeventsco.github.io/Desayunos-MonarcaEventsCO/" target="_blank" style="color: white;">Desayunos sorpresa personalizados</a></li>
-            <li>Organización de cumpleaños y quinceañeras</li>
-            <li>Eventos corporativos y celebraciones especiales</li>
-        </ul>
+    <div class="categories">
+        <div class="category active">Todos</div>
+        <div class="category">Románticos</div>
+        <div class="category">Especiales</div>
+        <div class="category">Premium</div>
+        <div class="category">Personalizados</div>
+    </div>
+
+    <section class="gallery">
+        <h2>Desayunos Sorpresa</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="https://i.postimg.cc/FzNLS8Wf/Screenshot-2025-01-10-at-15-55-19-Instagram.png" alt="Desayuno Romántico">
+                <div class="gallery-item-info">
+                    <div class="gallery-item-title">Desayuno Romántico</div>
+                    <div class="gallery-item-description">Perfecto para sorprender a esa persona especial en cualquier ocasión. Escribe al WhatsApp para más información.</div>
+                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
+                </div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="https://i.postimg.cc/7YPzZvJd/Screenshot-2025-01-10-at-15-47-21-Instagram.png" alt="Desayuno Especial">
+                <div class="gallery-item-info">
+                    <div class="gallery-item-title">Desayuno Especial</div>
+                    <div class="gallery-item-description">Una experiencia única llena de sabores y detalles inolvidables. Escribe al WhatsApp para más información.</div>
+                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
+                </div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="https://i.postimg.cc/m2dHcdQD/Screenshot-2025-01-10-at-15-47-51-Instagram.png" alt="Desayuno Clásico">
+                <div class="gallery-item-info">
+                    <div class="gallery-item-title">Desayuno Clásico</div>
+                    <div class="gallery-item-description">La combinación perfecta de sabores tradicionales con un toque elegante. Escribe al WhatsApp para más información.</div>
+                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
+                </div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="https://i.postimg.cc/dVLTG8B9/Screenshot-2025-01-10-at-15-48-22-Instagram.png" alt="Desayuno Premium">
+                <div class="gallery-item-info">
+                    <div class="gallery-item-title">Desayuno Premium</div>
+                    <div class="gallery-item-description">Una experiencia premium con los mejores ingredientes y presentación. Escribe al WhatsApp para más información.</div>
+                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
+                </div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="https://i.postimg.cc/4xqHPm2R/Screenshot-2025-01-10-at-15-48-43-Instagram.png" alt="Desayuno Deluxe">
+                <div class="gallery-item-info">
+                    <div class="gallery-item-title">Desayuno Deluxe</div>
+                    <div class="gallery-item-description">Lujo y elegancia en cada detalle para ocasiones realmente especiales. Escribe al WhatsApp para más información.</div>
+                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
+                </div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="https://i.postimg.cc/yNRgbs2g/Screenshot-2025-01-10-at-15-49-10-Instagram.png" alt="Desayuno Personalizado">
+                <div class="gallery-item-info">
+                    <div class="gallery-item-title">Desayuno Personalizado</div>
+                    <div class="gallery-item-description">Creado especialmente según tus preferencias y gustos. Escribe al WhatsApp para más información.</div>
+                    <button class="buy-button" onclick="comprarAhora(this, event)">Comprar ahora</button>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="contact">
         <h2>Contacto</h2>
         <p>
-            Si deseas información adicional o tienes alguna consulta, no dudes en contactarnos:<br>
+            Si deseas más información o tienes alguna consulta, no dudes en contactarnos:<br>
             <strong>Email:</strong> monarcaeventsco@gmail.com<br>
             <strong>WhatsApp:</strong> +57 317 4968554
             <a href="https://wa.me/+573174968554" target="_blank">
@@ -324,6 +576,7 @@
     </section>
 
     <script>
+        // Función del menú
         function toggleMenu() {
             const menu = document.getElementById('menu');
             const button = document.getElementById('menuButton');
@@ -332,6 +585,106 @@
             menu.classList.toggle('active');
             button.classList.toggle('active');
             overlay.classList.toggle('active');
+        }
+
+        // Función del modal mejorada
+        function openModal(item) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'modal-content';
+            
+            const img = document.createElement('img');
+            img.src = item.querySelector('img').src;
+            img.style.maxWidth = '100%';
+            img.style.borderRadius = '10px';
+            
+            const info = item.querySelector('.gallery-item-info').cloneNode(true);
+            
+            modalContent.appendChild(img);
+            modalContent.appendChild(info);
+            modal.appendChild(modalContent);
+            
+            const closeButton = document.createElement('button');
+            closeButton.className = 'modal-close';
+            modalContent.appendChild(closeButton);
+            
+            document.body.appendChild(modal);
+            
+            setTimeout(() => modal.classList.add('active'), 10);
+            
+            modal.onclick = (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    setTimeout(() => modal.remove(), 300);
+                }
+            };
+
+            closeButton.onclick = (e) => {
+                e.stopPropagation();
+                modal.classList.remove('active');
+                setTimeout(() => modal.remove(), 300);
+            };
+
+            document.body.style.overflow = 'hidden';
+            
+            modal.addEventListener('click', () => {
+                document.body.style.overflow = '';
+            });
+        }
+
+        // Función de compra actualizada
+        function comprarAhora(button, event) {
+            event.stopPropagation();
+            const item = button.closest('.gallery-item-info');
+            const title = item.querySelector('.gallery-item-title').textContent;
+            
+            const message = `¡Hola! Me interesa el ${title}. ¿Podrían darme más información?`;
+            window.open(`https://wa.me/+573174968554?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // Funcionalidad de categorías
+        document.querySelectorAll('.category').forEach(category => {
+            category.addEventListener('click', function() {
+                document.querySelectorAll('.category').forEach(c => 
+                    c.classList.remove('active'));
+                
+                this.classList.add('active');
+                
+                const selectedCategory = this.textContent.toLowerCase();
+                const items = document.querySelectorAll('.gallery-item');
+                
+                items.forEach(item => {
+                    const title = item.querySelector('.gallery-item-title')
+                        .textContent.toLowerCase();
+                    
+                    if (selectedCategory === 'todos') {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = title.includes(selectedCategory.slice(0, -1)) 
+                            ? 'block' 
+                            : 'none';
+                    }
+                });
+            });
+        });
+
+        // Lazy loading para imágenes
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
         }
     </script>
 </body>
