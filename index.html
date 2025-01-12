@@ -3,187 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Bienvenida</title>
+    <title>MonarcaEventsCO</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
-        body {
-            font-family: "Poppins", Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #121212;
-            color: #f1f1f1;
-            overflow-x: hidden;
+        :root {
+            --primary: #FFD700;
+            --primary-dark: #CCB000;
+            --bg-dark: #0A0A0A;
+            --bg-light: #1E1E1E;
+            --text-light: #f1f1f1;
         }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Poppins", Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Menú Mejorado */
         .menu-button {
             position: fixed;
             top: 20px;
             left: 20px;
-            background: rgba(30, 30, 30, 0.9);
-            border: 2px solid #FFD700;
-            border-radius: 12px;
+            background: rgba(10, 10, 10, 0.95);
+            border: none;
+            border-radius: 50%;
             cursor: pointer;
             z-index: 1001;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 50px;
-            height: 50px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            width: 60px;
+            height: 60px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .menu-button::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            padding: 2px;
+            background: linear-gradient(45deg, var(--primary), #FFA500);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
         }
 
         .menu-button:hover {
-            background: rgba(255, 215, 0, 0.1);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            transform: scale(1.1);
         }
 
         .menu-button div {
             width: 28px;
-            height: 3px;
-            background-color: #FFD700;
-            margin: 4px 0;
-            transition: all 0.3s ease;
-            border-radius: 3px;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), #FFA500);
+            margin: 5px auto;
+            transition: all 0.4s ease;
+            border-radius: 2px;
+        }
+
+        .menu-button.active {
+            transform: rotate(180deg);
         }
 
         .menu-button.active div:nth-child(1) {
             transform: rotate(45deg) translate(5px, 5px);
+            width: 32px;
         }
 
         .menu-button.active div:nth-child(2) {
             opacity: 0;
+            transform: translateX(-20px);
         }
 
         .menu-button.active div:nth-child(3) {
             transform: rotate(-45deg) translate(7px, -7px);
+            width: 32px;
         }
 
         .menu {
             position: fixed;
             top: 0;
             left: -100%;
-            width: 280px;
+            width: 300px;
             height: 100%;
-            background: rgba(30, 30, 30, 0.95);
-            color: #f1f1f1;
-            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.5);
-            transition: left 0.3s ease;
+            background: rgba(10, 10, 10, 0.97);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            padding: 80px 30px 30px;
+            padding: 100px 40px 40px;
             backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 215, 0, 0.1);
         }
 
-        .menu.active {
-            left: 0;
-        }
-
-        .menu a {
-            color: #FFD700;
-            text-decoration: none;
-            font-size: 1.1rem;
-            margin: 15px 0;
-            padding: 12px 20px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid transparent;
-        }
-
-        .menu a:hover {
-            background: rgba(255, 215, 0, 0.2);
-            border-color: #FFD700;
-            transform: translateX(10px);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
-        }
-
-        .overlay {
-            position: fixed;
+        .menu::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 999;
-            backdrop-filter: blur(3px);
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.03), transparent);
+            pointer-events: none;
         }
 
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 6rem 1rem;
-            background-color: #1E1E1E;
-            color: white;
-            font-size: 1.2rem;
-            animation: fadeIn 1.5s ease-in-out;
-            position: relative;
-            overflow: hidden;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
-            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .hero h2 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            animation: slideInRight 1.5s ease;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .highlight {
-            color: #FFD700;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-            position: relative;
-            display: inline-block;
-        }
-
-        .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
+        .menu.active {
             left: 0;
-            width: 100%;
-            height: 2px;
-            background: #FFD700;
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
         }
 
-        .highlight:hover::after {
-            transform: scaleX(1);
-        }
-
-        .services {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: auto;
-            animation: fadeInUp 1s ease;
-        }
-
-        .services ul li {
-            background: rgba(30, 30, 30, 0.95);
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 215, 0, 0.3);
+        .menu a {
+            display: block;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            padding: 15px 25px;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 215, 0, 0.05);
             position: relative;
             overflow: hidden;
         }
 
-        .services ul li::before {
+        .menu a::before {
             content: '';
             position: absolute;
             top: 0;
@@ -195,86 +146,290 @@
             transition: transform 0.6s ease;
         }
 
-        .services ul li:hover::before {
+        .menu a:hover {
+            background: rgba(255, 215, 0, 0.15);
+            transform: translateX(10px) scale(1.02);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .menu a:hover::before {
             transform: translateX(100%);
         }
 
-        .services ul li:hover {
-            transform: translateY(-10px);
-            border-color: #FFD700;
-            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.2);
-        }
-
-        .contact {
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             padding: 6rem 2rem;
-            background: rgba(30, 30, 30, 0.95);
-            border-top: 2px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .contact h2 {
-            color: #FFD700;
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
             position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
+            overflow: hidden;
+            background: radial-gradient(circle at center, rgba(30, 30, 30, 0.9), rgba(10, 10, 10, 0.95));
         }
 
-        .contact h2::after {
+        .hero::before {
             content: '';
             position: absolute;
-            bottom: -10px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 45%, rgba(255, 215, 0, 0.1) 50%, transparent 55%),
+                linear-gradient(-45deg, transparent 45%, rgba(255, 215, 0, 0.1) 50%, transparent 55%);
+            background-size: 60px 60px;
+            animation: gridAnimation 4s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes gridAnimation {
+            0% { background-position: 0 0; }
+            100% { background-position: 60px 60px; }
+        }
+
+        .hero h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            line-height: 1.2;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1.5s ease;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease 0.5s forwards;
+        }
+
+        .highlight {
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding: 0 5px;
+        }
+
+        .highlight::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--primary);
+            opacity: 0.3;
+            transform: skewX(-15deg);
+        }
+
+        /* Servicios */
+        .services {
+            padding: 8rem 2rem;
+            background: var(--bg-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 4rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .services h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .services ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .services li {
+            background: rgba(10, 10, 10, 0.8);
+            padding: 2.5rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .services li::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(45deg, transparent, var(--primary), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.5;
+            transition: opacity 0.4s ease;
+        }
+
+        .services li:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .services li:hover::before {
+            opacity: 1;
+        }
+
+        .services a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: inline-block;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .services a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .services a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Contacto */
+        .contact {
+            padding: 8rem 2rem;
+            background: linear-gradient(to bottom, var(--bg-dark), rgba(10, 10, 10, 0.98));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .contact h2 {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .contact p {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+
+        .contact strong {
+            color: var(--primary);
+            font-weight: 600;
         }
 
         .whatsapp-icon {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             vertical-align: middle;
-            margin-left: 8px;
-            transition: all 0.3s ease;
+            margin-left: 10px;
             border-radius: 50%;
-            padding: 5px;
+            padding: 8px;
             background: rgba(255, 215, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
         }
 
         .whatsapp-icon:hover {
-            transform: scale(1.2) rotate(10deg);
+            transform: scale(1.2) rotate(15deg);
             background: rgba(255, 215, 0, 0.2);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            backdrop-filter: blur(5px);
         }
 
-        @keyframes slideInRight {
-            from { transform: translateX(-100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
 
         @keyframes fadeInUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 768px) {
-            .hero h2 {
-                font-size: 2.2rem;
-            }
-
             .menu {
-                width: 250px;
+                width: 280px;
+                padding: 80px 25px 25px;
             }
 
             .services ul {
                 grid-template-columns: 1fr;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .contact p {
+                font-size: 1rem;
+                padding: 0 1rem;
             }
         }
     </style>
@@ -290,8 +445,8 @@
 
     <div class="menu" id="menu">
         <a href="https://monarcaeventsco.github.io/Desayunos-MonarcaEventsCO/">Desayunos</a>
-        <a href="https://monarcaeventsco.github.io/Horarios-MonarcaEvenstCO/#">Horarios de Atención</a>
-        <a href="https://monarcaeventsco.github.io/MonarcaEventsCO-Informacion-de-contacto/#">Información de Contacto</a>
+        <a href="https://monarcaeventsco.github.io/Horarios-MonarcaEvenstCO/">Horarios de Atención</a>
+        <a href="<a href="https://monarcaeventsco.github.io/MonarcaEventsCO-Informacion-de-contacto/">Información de Contacto</a>
     </div>
 
     <section class="hero">
@@ -305,7 +460,7 @@
         <h2>Nuestros Servicios</h2>
         <ul>
             <li>Decoración para fiestas y eventos</li>
-            <li><a href="https://monarcaeventsco.github.io/Desayunos-MonarcaEventsCO/" target="_blank" style="color: white;">Desayunos sorpresa personalizados</a></li>
+            <li><a href="https://monarcaeventsco.github.io/Desayunos-MonarcaEventsCO/" target="_blank">Desayunos sorpresa personalizados</a></li>
             <li>Organización de cumpleaños y quinceañeras</li>
             <li>Eventos corporativos y celebraciones especiales</li>
         </ul>
@@ -333,6 +488,25 @@
             button.classList.toggle('active');
             overlay.classList.toggle('active');
         }
+
+        // Efecto de scroll suave para los enlaces del menú
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('.menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('menu').classList.remove('active');
+                document.getElementById('menuButton').classList.remove('active');
+                document.getElementById('overlay').classList.remove('active');
+            });
+        });
     </script>
 </body>
 </html>
