@@ -11,8 +11,8 @@ MonarcaEventsCO es una tienda de **desayunos sorpresa personalizados** en Cali, 
 ## Contacto
 
 - Teléfono: +57 317 4968554
-- Email: monarcaeventsco@example.com
-- Página web: [https://monarcaeventsco.github.io/MonarcaEventsCO/)
+- Email: monarcaeventsco@gmail.com
+- Página web: [https://monarcaeventsco.github.io/MonarcaEventsCO/](https://monarcaeventsco.github.io/MonarcaEventsCO/)
 
 ## ¿Por qué elegirnos?
 
@@ -28,4 +28,4 @@ Para hacer tu pedido, simplemente visita nuestra página web o contáctanos por 
 
 Síguenos en nuestras redes sociales para ver más de nuestros productos:
 - Instagram: [@MonarcaEventsCO](https://instagram.com/monarcaeventsco)
-- Facebook: [Monarca Events](https://facebook.com/monarcaeventsco)
+- Facebook: [Monarca Events](https://www.facebook.com/profile.php?id=61571962794072)
